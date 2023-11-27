@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from discord.ext import tasks, commands
 import random
 import backstab
-from cogs.asyncTask import backgroundTasks
+import cogs.asyncTask
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -20,6 +20,7 @@ bot = commands.Bot(command_prefix='`', description=description, intents=intents)
 async def on_ready():
     print(f'Logged in as {bot.user} (ID: {bot.user.id})')
     print('------')
+    await bot.add_cog(cogs.asyncTask.backgroundTasks(bot))
          
 @bot.command()
 async def test(ctx, arg):
